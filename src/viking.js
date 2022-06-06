@@ -96,6 +96,43 @@ class War {
     return damageToViking;
   }
 
+
+  //OPCIONAL SIN TEST
+  attack(attacker) {
+
+    let randomAttacker, randomDeffender;
+
+    if(attacker.hasOwnProperty("name")) {
+
+      randomAttacker = Math.floor(Math.random()*(this.vikingArmy.length));
+      randomDeffender = Math.floor(Math.random()*(this.saxonArmy.length));
+      
+      let damage =  this.saxonArmy[randomAttacker].receiveDamage(this.vikingArmy[randomDeffender].strength);
+
+      if(this.saxonArmy[randomDeffender].health < 0) {
+        this.saxonArmy.splice(randomDeffender);
+      }
+
+      return damage;
+
+    } else {
+
+      randomAttacker = Math.floor(Math.random()*(this.saxonArmy.length));
+      randomDeffender = Math.floor(Math.random()*(this.vikingArmy.length));
+
+      let damage = this.vikingArmy[randomDeffender].receiveDamage(this.saxonArmy[randomAttacker].strength);
+
+      if(this.vikingArmy[randomAttacker].health <= 0) {
+        this.vikingArmy.splice(randomDeffender);
+      }
+
+      return damage;
+
+    }
+
+  }
+
+
   showStatus() {
     
     if(this.saxonArmy.length === 0) {
